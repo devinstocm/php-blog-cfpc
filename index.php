@@ -6,7 +6,7 @@ session_start();
 require_once 'database/database.php';
 require_once 'flash.php';
 
-//script PHP
+//--script PHP
 
 $pageTitle = 'Notre blog d\'accueil';
 ob_start();
