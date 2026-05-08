@@ -22,7 +22,7 @@ if(isset($_POST['add-article'])){
 
   // Validation des données
     if (empty($title) || empty($slug) || empty($introduction) || empty($content)) {
-        $error = 'Veuillez remplir tous les champs obligatoires du formulaire !';
+        $error = '---Veuillez remplir tous les champs obligatoires du formulaire--- !';
   
         $query = $pdo->prepare('SELECT * FROM articles WHERE slug = :slug');
         $query->execute([':slug' => $slug]);
