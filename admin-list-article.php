@@ -5,6 +5,7 @@ session_start();
 require_once 'database/database.php';
 require_once 'flash.php';
 require_once 'app/Enums/Role.php';
+require_once 'app/helpers.php';
 
 
 if ($_SESSION['auth']['role'] !== Role::ADMIN->value) 
@@ -13,14 +14,22 @@ if ($_SESSION['auth']['role'] !== Role::ADMIN->value)
     exit();
 }
 
+$searchTerm = '';
+if(isset($_POST['search'])) {
+  $searchTerm =clean_input((string) ($_POST['search'] ?? ''));
+  }
+
 $query = 'SELECT * FROM articles';
-$query = $pdo->prepare($query);
-$query->execute();
-$allArticles = $query->fetchAll();
-
-
-
-
+if(!empty($searchTerm)){
+  $query .=' WHERE title LIKE :searchTerm OR introduction LIKE :searchTerm';
+}
+$query .= ' ORDER BY created_at DESC';
+ $resultats= $pdo->prepare($query);
+ if(!empty($searchTerm)){
+$resultats->bindValue(':searchTerm', '%' .$searchTerm. '%');
+ }
+$resultats->execute();
+ $allArticles = $resultats->fetchAll(PDO::FETCH_ASSOC);
 
 $pageTitle = 'List Articles';
 ob_start();

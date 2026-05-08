@@ -91,7 +91,7 @@ if (! empty($errors)) { ?>
         <tr>
             <th>Image</th>
             <th>Titre</th>
-            <th>Introduction</th>
+           
             <th>Date</th>
             <th>Actions</th>
         </tr>
@@ -105,7 +105,7 @@ if (! empty($errors)) { ?>
                     <?php } ?>
                 </td>
                 <td><?= htmlspecialchars($article['title']) ?></td>
-                <td><?= htmlspecialchars($article['introduction']) ?></td>
+                
                 <td><?= htmlspecialchars($article['created_at']) ?></td>
                 <td style="display: flex; justify-content: center; align-items: center;">
                     <a href="article.php?id=<?= urlencode($article['id']); ?>">

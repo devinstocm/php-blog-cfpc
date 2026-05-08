@@ -21,16 +21,17 @@
     
 <?php
 
+        require_once 'app/Enums/Role.php';
         switch (true) {
-            case isset($_SESSION['auth']) && ($_SESSION['role'] == 'admin'):
-                ?>  
+            case ($_SESSION['auth']['role'] ?? null) === Role::ADMIN->value:
+        ?>
     <div class="auth-container">
        
        <div class="profile" >
                 <img src="/publicAll/images/profil.png" alt="Photo de profil">
                 <div class="profile-link">
-                    <a href="admin.php"><i class='bx bxs-user-circle icon'></i> Dashboard</a>
-                    <a href="logout.php"><i class='bx bxs-log-out-circle icon'></i> Déconnexion</a>
+                    <a href="/admin.php"><i class='bx bxs-user-circle icon'></i> Dashboard</a>
+                    <a href="/logout.php"><i class='bx bxs-log-out-circle icon'></i> Déconnexion</a>
                 </div>
        </div>
         <?php
