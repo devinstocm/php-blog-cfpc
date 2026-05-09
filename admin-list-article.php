@@ -31,6 +31,12 @@ $resultats->bindValue(':searchTerm', '%' .$searchTerm. '%');
 $resultats->execute();
  $allArticles = $resultats->fetchAll(PDO::FETCH_ASSOC);
 
+$success = [];
+$flash = flash_get();
+if ($flash !== null) {
+    $success['update'] = $flash['message'];
+}
+
 $pageTitle = 'List Articles';
 ob_start();
 require_once 'resources/views/admin/articles/admin-list-article_html.php';
